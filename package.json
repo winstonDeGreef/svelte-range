@@ -1,0 +1,15 @@
+{
+  "name": "svelte-range",
+  "version": "1.0.0",
+  "description": "A memory efficient python-style range function for svelte each blocks. It sets the length property to the correct integer and uses a proxy to calculate indexes when requested.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "svelte",
+    "range"
+  ],
+  "author": "Winston de Greef <winstondegreef@gmail.com> (https://winstondegreef.com)",
+  "license": "MIT"
+}
