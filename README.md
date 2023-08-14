@@ -1,6 +1,11 @@
 # svlete-range
 A memory efficient python-style range function for svelte each blocks. It sets the length property to the correct integer and uses a proxy to calculate indexes when requested and does not store all the values. The proxy also implements an iterator, so it can be used in for loops. (`for (let i of range(10)) ...`). This also makes debugging faulty ranges easier, because you can do `[...range(10)]` to get an array of the values. This also makes it future proof whenever svelte adds support for iterators in #each blocks.
 
+# installation
+```bash
+npm i svelte-range
+```
+
 # usage
 ```svelte
 <script>
