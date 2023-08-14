@@ -23,13 +23,15 @@ A memory efficient python-style range function for svelte each blocks. It sets t
 ```typescript
 function range(stop: number): number[]
 // Equivalent to range(0, stop, 1)
-// Although it claims to return an integer array, most methods on arrays are not implemented, and will throw an error.
+// Although it claims to return an integer array,
+//most methods on arrays are not implemented, and will throw an error.
 // The implemented methods are: toString and @@iterator
 
 function range(start: number, stop: number): number[]
 // Equivalent to range(start, stop, 1)
 
 function range(start: number, stop: number, step: number): number[]
-// returns a proxy that emulates and array calculated by: start with start and continuously add step to it until we reach stop (or pass by it)
+// returns a proxy that emulates and array calculated by:
+// start with start and continuously add step to it until we reach stop (or pass by it)
 
 ```
