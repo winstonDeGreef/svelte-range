@@ -33,7 +33,7 @@ function svelteRange(start, stop, step) {
                     yield start + i * step
                 }
             }
-            if (prop in Array.prototype) throw new TypeError("Array methods (except toString and @@iterator) are not supported by svelte-range")
+            if (prop in t) throw new TypeError("Array methods (or object methods) (except toString and @@iterator) are not supported by svelte-range")
 
             let index = Number.parseFloat(prop)
             if (Number.isNaN(index) || Math.ceil(index) !== index) return undefined
