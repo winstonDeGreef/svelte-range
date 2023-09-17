@@ -17,13 +17,11 @@ function svelteRange(start, stop, step) {
     if (!Number.isFinite(start)) throw new RangeError("start must be finite");
     if (!Number.isFinite(stop)) throw new RangeError("stop must be finite");
     if (!Number.isFinite(step)) throw new RangeError("step must be finite");
-    if (Math.floor(start) !== start) console.warn("start is not a whole number. This could cause unexpected behavior because floating point numbers are a bit weird. ie svelteRange(0.5, 0.8, 0.1) will return [0.5, 0.6, 0.7, 0.8] instead of [0.5, 0.6, 0.7] because 0.5 + 0.1 + 0.1 + 0.1 = 0.7999999999999999 which is less than 8.")
-    if (Math.floor(step) !== step) console.warn("step is not a whole number. This could cause unexpected behavior because floating point numbers are a bit weird. ie svelteRange(0.5, 0.8, 0.1) will return [0.5, 0.6, 0.7, 0.8] instead of [0.5, 0.6, 0.7] because 0.5 + 0.1 + 0.1 + 0.1 = 0.7999999999999999 which is less than 8.")
-    if (Math.floor(stop) !== stop) console.warn("stop is not a whole number. This could cause unexpected behavior (BUT LESS BECAUSE svelteRange DOES NOT DO ANY MATH WITH STOP, ONLY COMPARISON) because floating point numbers are a bit weird. ie svelteRange(0.5, 0.8, 0.1) will return [0.5, 0.6, 0.7, 0.8] instead of [0.5, 0.6, 0.7] because 0.5 + 0.1 + 0.1 + 0.1 = 0.7999999999999999 which is less than 8.")
+    if (Math.floor(start) !== start) console.warn("start is not a whole number. This could cause unexpected behavior because floating point numbers are a bit weird. ie svelteRange(0.5, 0.8, 0.1) will return [0.5, 0.6, 0.7, 0.8] instead of [0.5, 0.6, 0.7] because the length of the range is calculated as (0.8 - 0.5) / 0.1 + 1 which is 4.0000000000000004 (although this is fixable, there might other floating point weirdness.")
+    if (Math.floor(step) !== step) console.warn("step is not a whole number. This could cause unexpected behavior because floating point numbers are a bit weird. ie svelteRange(0.5, 0.8, 0.1) will return [0.5, 0.6, 0.7, 0.8] instead of [0.5, 0.6, 0.7] because the length of the range is calculated as (0.8 - 0.5) / 0.1 + 1 which is 4.0000000000000004 (although this is fixable, there might other floating point weirdness.")
+    if (Math.floor(stop) !== stop) console.warn("stop is not a whole number. This could cause unexpected behavior because floating point numbers are a bit weird. ie svelteRange(0.5, 0.8, 0.1) will return [0.5, 0.6, 0.7, 0.8] instead of [0.5, 0.6, 0.7] because the length of the range is calculated as (0.8 - 0.5) / 0.1 + 1 which is 4.0000000000000004 (although this is fixable, there might other floating point weirdness.")
     
-    let length = 0
-    if (step === 0) length = [0, Infinity][Number(start !== stop)]
-    else length = Math.max(Math.ceil(Math.abs(stop - start) / step), 0)
+    let length = Math.max(Math.ceil(Math.abs(stop - start) / step), 0)
     
 
     return new Proxy([], {
@@ -35,7 +33,7 @@ function svelteRange(start, stop, step) {
                     yield start + i * step
                 }
             }
-            if (prop in Array.prototype) throw new TypeError("Array methods (except toString and @@iterator) are not supported")
+            if (prop in Array.prototype) throw new TypeError("Array methods (except toString and @@iterator) are not supported by svelte-range")
 
             let index = Number.parseFloat(prop)
             if (Number.isNaN(index) || Math.ceil(index) !== index) return undefined
