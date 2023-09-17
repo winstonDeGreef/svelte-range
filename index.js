@@ -39,7 +39,28 @@ function svelteRange(start, stop, step) {
             if (Number.isNaN(index) || Math.ceil(index) !== index) return undefined
             if (index >= length) return undefined
             return start + index * step
-        }
+        },
+
+        set: (t, prop, value) => {
+            throw "setting properties is not supported on this object: svelte-range instance is immutable (although its type may say its array[]"
+        },
+
+        defineProperty: (t, prop, descriptor) => {throw "Object.defineProperty is not supported on this object: svelte-range instance is immutable (although its type may say its array[]"},
+
+        deleteProperty: () => {throw "Object.deleteProperty is not supported on this object: svelte-range instance is immutable (although its type may say its array[]"},
+
+        getOwnPropertyDescriptor: () => {throw "Object.getOwnPropertyDescriptor is not supported on this object: svelte-range instance does not implement this (although its type may say its array[]"},
+
+        has: () => {throw "`x in object` is not supported on this object: svelte-range instance does not implement this (although its type may say its array[]"},
+        isExtensible: () => {throw "Object.isExtensible is not supported on this object: svelte-range instance does not implement this (although its type may say its array[]"},
+
+        ownKeys: () => {throw "Object.keys is not supported on this object: svelte-range instance does not implement this (although its type may say its array[]"},
+        preventExtensions: () => {throw "Object.preventExtensions is not supported on this object: svelte-range instance does not implement this (although its type may say its array[]"},
+        setPrototypeOf: () => {throw "Object.setPrototypeOf is not supported on this object: svelte-range instance does not implement this (although its type may say its array[]"}
+
+
+
+
     })
 }
 
