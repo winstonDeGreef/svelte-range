@@ -1,6 +1,6 @@
 {
   "name": "svelte-range",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "A memory efficient python-style range function for svelte each blocks. It sets the length property to the correct integer and uses a proxy to calculate indexes when requested.",
   "main": "index.js",
   "scripts": {
